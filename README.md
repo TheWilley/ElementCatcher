@@ -20,7 +20,7 @@ The parent element will be added by default.
 
 ### Example 
 ```javascript
-new elementLogger({
+new elementCatcher({
     "id": "someId",
     "ignoreClass": "someClass"
 })
@@ -29,7 +29,7 @@ new elementLogger({
 or
 
 ```javascript
-new elementLogger({
+new elementCatcher({
     "id": "someId",
     "includeClass": "someClass"
 })
@@ -40,7 +40,7 @@ new elementLogger({
 ## Accessing the elements
 Lets say I have the following instance:
 ```javascript
-var catcher = new elementLogger({
+var catcher = new elementCatcher({
     "id": "someId",
     "includeClass": "someClass"
 })
