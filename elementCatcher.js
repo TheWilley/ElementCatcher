@@ -29,9 +29,10 @@ class elementCatcher {
     }
 
     start() {
-        for (const element of this.app.childNodes) {
-            if(this.#object.includeClass) if (element.id && element.className != this.#object.ignoreClass) this[element.id] = element
-            else if (element.id && element.className == this.#object.includeClass) this[element.id] = element
+        for (const element of this.#object.directChildren ? this.app.getElementsByTagName("*") : this.app.childNodes) {
+            if(this.#object.ignoreClass) { if (element.id && element.className != this.#object.ignoreClass) this[element.id] = element } 
+            else if (this.#object.includeClass) { if (element.id && element.className == this.#object.includeClass) this[element.id] = element }
+            else { if(element.id) this[element.id] = element }
         }
     }
 }
