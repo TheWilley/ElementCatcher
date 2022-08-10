@@ -17,7 +17,7 @@ Then simply create a new instance with `new elementCatcher()` in your script
 | includeClass | no | Only elements **with** this class name with be added |
 
 ### Example 
-```
+```javascript
 new elementLogger({
     "id": "someId",
     "ignoreClass": "someClass"
@@ -26,7 +26,7 @@ new elementLogger({
 
 or
 
-```
+```javascript
 new elementLogger({
     "id": "someId",
     "includeClass": "someClass"
@@ -37,7 +37,7 @@ new elementLogger({
 
 ## Accessing the elements
 Lets say I have the following instance:
-```
+```javascript
 var catcher = new elementLogger({
     "id": "someId",
     "includeClass": "someClass"
@@ -45,7 +45,9 @@ var catcher = new elementLogger({
 ```
 
 and this html:
-`<div id="someId"> </div>`
+```html
+<div id="someId"> </div>
+```
 
 I could then access the element with:
 `catcher.someId`
