@@ -10,11 +10,12 @@ Then simply create a new instance with `new elementCatcher()` in your script.
 
 ## Options
 
-| Key | Required | Description |
-| ----------- | ------------ |------------ |
-| id  | yes  | The target `id` of your parent element. Elements under this element with be catched. By default **all** elements will be catched. |
-| ignoreClass | no | Only elements **without**  with this class name with be added |
-| includeClass | no | Only elements **with** this class name with be added |
+| Key | Type |Required | Description
+| ----------- | ------------ |------------ |------------ |
+| id  | string | yes  | The target `id` of your parent element. Elements under this element with be catched. By default **all** elements will be catched. |
+| ignoreClass | string | no | Only elements **without**  with this class name with be added |
+| includeClass | string | no | Only elements **with** this class name with be added |
+| directChildren | bool | no | Only the first childs of the element will bev added 
 
 The parent element will be added by default.
 
