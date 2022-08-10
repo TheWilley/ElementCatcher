@@ -50,9 +50,9 @@ and this html:
 ```
 
 I could then access the element with:
-`catcher.someId`
+`catcher.someId`.
 
 Thus, instead of `document.getElementById("someId")` we do `catcher.someId`.
 
 ## Help
-For help and or questions, please create an issue
+For help and or questions, please create an issue.
