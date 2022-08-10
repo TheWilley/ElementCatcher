@@ -16,6 +16,8 @@ Then simply create a new instance with `new elementCatcher()` in your script.
 | ignoreClass | no | Only elements **without**  with this class name with be added |
 | includeClass | no | Only elements **with** this class name with be added |
 
+The parent element will be added by default.
+
 ### Example 
 ```javascript
 new elementLogger({
@@ -33,7 +35,7 @@ new elementLogger({
 })
 ```
 
-**Note that there cannot be both a `ìgnoreClass` and `includeClass`** option in the same instance!
+**Note that there cannot be both a `ìgnoreClass` and `includeClass`** option in the same instance! 
 
 ## Accessing the elements
 Lets say I have the following instance:
