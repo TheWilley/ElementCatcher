@@ -6,7 +6,7 @@ The overall goal is to reduce the amount of `getElementById()` calls in a docume
 ## Setup
 Load *elementCatcher* at the **bottom** of your html file: `<script src='elementCatcher.js'>` or you can add the the `defer` option to your script tag.
 
-Then simply create a new instance with `new elementCatcher()` in your script
+Then simply create a new instance with `new elementCatcher()` in your script.
 
 ## Options
 
