@@ -1,5 +1,5 @@
 # elementCatcher
-Get all child elements under an ID for object syntax.
+Get and access child elements under an ID using object syntax.
 
 The overall goal is to reduce the amount of `getElementById()` calls in a document and instead access elements in a object using the element id as the object key.
 
