@@ -25,7 +25,7 @@ The *target element* will be catched by default.
 ```javascript
 new elementCatcher({
     "id": "someId",
-    "getElementwith": "id",
+    "getElementWith": "id",
     "includeClass": "someClass"
 })
 ```
@@ -39,7 +39,7 @@ Lets say I have the following instance:
 ```javascript
 var catcher = new elementCatcher({
     "id": "someId",
-    "getElementswith": "id",
+    "getElementsWith": "id",
     "includeClass": "someClass"
 })
 ```
@@ -89,7 +89,7 @@ Lets say I have the following instance:
 ```javascript
 var catcher = new elementCatcher({
     "id": "someId",
-    "getElementswith": "all",
+    "getElementsWith": "all",
     "includeClass": "someClass"
 })
 ```
@@ -120,7 +120,7 @@ Lets say I have the following instance:
 ```javascript
 var catcher = new elementCatcher({
     "id": "someId",
-    "getElementswith": "allAsArray",
+    "getElementsWith": "allAsArray",
 })
 ```
 
