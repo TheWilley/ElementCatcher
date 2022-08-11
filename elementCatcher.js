@@ -17,7 +17,7 @@
     }
 
     error(message) {
-        alert("Error - " + message)
+        alert("[[elementCatcher]] Error - " + message)
         throw new Error(message)
     }
 
@@ -50,7 +50,7 @@
                 for (const element of this.#object.directChildren ? this.app.childNodes : this.app.getElementsByTagName("*")) {
                     if (this.#object.ignoreClass) { if (element.classList.contains(!this.#object.ignoreClass)) element.id ? this[element.id] = element : this.elements.push(element) }
                     else if (this.#object.includeClass) { if (element.classList.contains(this.#object.includeClass)) element.id ? this[element.id] = element : this.elements.push(element)  }
-                    else { this.elements.push(element) } 
+                    else { element.id ? this[element.id] = element : this.elements.push(element) } 
                 }
                 break;
             case 'allAsArray':
@@ -61,7 +61,7 @@
                 }
                 break;
             default:
-                this.error(`No 'getElementsWith' option`)
+                this.error(`'${this.#object.getElementsWith}' is not a valid getElementsWith option (id, class, all, allAsArray)`)
         }
     }
 }
