@@ -58,8 +58,8 @@ catcher.someSpan
 
 Thus, instead of `document.getElementById("someSpan")` we do `catcher.someSpan`.
 
-### class is
-This option useful if you want to iterate trough a class, but generally not useful to get a specific element as the array is dynamic.
+### class
+This option is useful if you want to iterate trough a class, but generally not useful to get a specific element as the array is dynamic.
 
 Lets say I have the following instance:
 ```javascript
