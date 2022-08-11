@@ -34,8 +34,8 @@
         switch(this.#object.getElementsWith) {
             case 'id':
                 for (const element of this.#object.directChildren ? this.app.childNodes : this.app.getElementsByTagName("*")) {
-                    if (this.#object.ignoreClass) { if (element.id && element.className != this.#object.ignoreClass) this[element.id] = element }
-                    else if (this.#object.includeClass) { if (element.id && element.className == this.#object.includeClass) this[element.id] = element }
+                    if (this.#object.ignoreClass) { if (!element.id && element.classList.contains(this.#object.ignoreClass)) this[element.id] = element }
+                    else if (this.#object.includeClass) { if (element.id && element.classList.contains(this.#object.ignoreClass)) this[element.id] = element }
                     else if (element.id) { this[element.id] = element }
                 }
                 break;
