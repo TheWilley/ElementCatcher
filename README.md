@@ -1,5 +1,5 @@
 # elementCatcher
-Get and access child elements under an ID using object syntax.
+Access child elements using object syntax.
 
 The overall goal is to reduce the amount of `getElementById()` calls in a document and instead access elements in a object using the element id as the object key.
 
@@ -12,12 +12,12 @@ Then simply create a new instance with `new elementCatcher()` in your script.
 
 | Key | Type |Required | Description
 | ----------- | ------------ |------------ |------------ |
-| id  | string | yes  | The target `id` of your parent element. Elements under this element with be catched. By default **all** elements will be catched. |
-| ignoreClass | string | no | Only elements **without**  with this class name with be added |
-| includeClass | string | no | Only elements **with** this class name with be added |
-| directChildren | bool | no | Only the first childs of the element will bev added 
+| id  | string | yes  | The `id` of your *target element*. By default, all children of this element with be catched.  |
+| ignoreClass | string | no | Only elements **without**   this class name will be added |
+| includeClass | string | no | Only elements **with** this class name will be added |
+| directChildren | bool | no | If you only want the direct children of your target element to be added, set this to true. By default, all elements (including "grand children") will be catched.
 
-The parent element will be added by default.
+The *target element* will be catched by default.
 
 ### Example 
 ```javascript
@@ -36,7 +36,7 @@ new elementCatcher({
 })
 ```
 
-**Note that there cannot be both a `ìgnoreClass` and `includeClass`** option in the same instance! 
+**Note that there cannot be both a `ìgnoreClass` and `includeClass`** option in the same instance
 
 ## Accessing the elements
 Lets say I have the following instance:
@@ -49,11 +49,13 @@ var catcher = new elementCatcher({
 
 and this html:
 ```html
-<div id="someId"> </div>
+<div id="someId"></div>
 ```
 
 I could then access the element with:
-`catcher.someId`.
+```javascript
+catcher.someId
+```
 
 Thus, instead of `document.getElementById("someId")` we do `catcher.someId`.
 
