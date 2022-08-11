@@ -31,32 +31,37 @@
     }
 
     start() {
-        if (this.#object.getElementsWith == "id") {
-            for (const element of this.#object.directChildren ? this.app.childNodes : this.app.getElementsByTagName("*")) {
-                if (this.#object.ignoreClass) { if (element.id && element.className != this.#object.ignoreClass) this[element.id] = element }
-                else if (this.#object.includeClass) { if (element.id && element.className == this.#object.includeClass) this[element.id] = element }
-                else if (element.id) { this[element.id] = element }
-            }
-        } else if (this.#object.getElementsWith == "class") {
-            for (const element of this.#object.directChildren ? this.app.childNodes : this.app.getElementsByTagName("*")) {
-                if (this.#object.ignoreClass) { if (element.className && element.classList.contains(!this.#object.ignoreClass)) this.elements.push(element) }
-                else if (this.#object.includeClass) { if (element.className && element.classList.contains(this.#object.includeClass)) this.elements.push(element) }
-                else if (element.className) { this.elements.push(element) }
-            }
-        } else if(this.#object.getElementsWith == "all") {
-            for (const element of this.#object.directChildren ? this.app.childNodes : this.app.getElementsByTagName("*")) {
-                if (this.#object.ignoreClass) { if (element.classList.contains(!this.#object.ignoreClass)) element.id ? this[element.id] = element : this.elements.push(element) }
-                else if (this.#object.includeClass) { if (element.classList.contains(this.#object.includeClass)) element.id ? this[element.id] = element : this.elements.push(element)  }
-                else { this.elements.push(element) } 
-            }
-        } else if(this.#object.getElementsWith == "allAsArray"){
-            for (const element of this.#object.directChildren ? this.app.childNodes : this.app.getElementsByTagName("*")) {
-                if (this.#object.ignoreClass) { if (element.classList.contains(!this.#object.ignoreClass)) this.elements.push(element) }
-                else if (this.#object.includeClass) { if (element.classList.contains(this.#object.includeClass)) this.elements.push(element) }
-                else { this.elements.push(element) }
-            }
-        } else {
-            this.error(`No 'getElementsWith' option`)
+        switch(this.#object.getElementsWith) {
+            case 'id':
+                for (const element of this.#object.directChildren ? this.app.childNodes : this.app.getElementsByTagName("*")) {
+                    if (this.#object.ignoreClass) { if (element.id && element.className != this.#object.ignoreClass) this[element.id] = element }
+                    else if (this.#object.includeClass) { if (element.id && element.className == this.#object.includeClass) this[element.id] = element }
+                    else if (element.id) { this[element.id] = element }
+                }
+                break;
+            case 'class':
+                for (const element of this.#object.directChildren ? this.app.childNodes : this.app.getElementsByTagName("*")) {
+                    if (this.#object.ignoreClass) { if (element.className && element.classList.contains(!this.#object.ignoreClass)) this.elements.push(element) }
+                    else if (this.#object.includeClass) { if (element.className && element.classList.contains(this.#object.includeClass)) this.elements.push(element) }
+                    else if (element.className) { this.elements.push(element) }
+                }
+                break;
+            case 'all':
+                for (const element of this.#object.directChildren ? this.app.childNodes : this.app.getElementsByTagName("*")) {
+                    if (this.#object.ignoreClass) { if (element.classList.contains(!this.#object.ignoreClass)) element.id ? this[element.id] = element : this.elements.push(element) }
+                    else if (this.#object.includeClass) { if (element.classList.contains(this.#object.includeClass)) element.id ? this[element.id] = element : this.elements.push(element)  }
+                    else { this.elements.push(element) } 
+                }
+                break;
+            case 'allAsArray':
+                for (const element of this.#object.directChildren ? this.app.childNodes : this.app.getElementsByTagName("*")) {
+                    if (this.#object.ignoreClass) { if (element.classList.contains(!this.#object.ignoreClass)) this.elements.push(element) }
+                    else if (this.#object.includeClass) { if (element.classList.contains(this.#object.includeClass)) this.elements.push(element) }
+                    else { this.elements.push(element) }
+                }
+                break;
+            default:
+                this.error(`No 'getElementsWith' option`)
         }
     }
 }
