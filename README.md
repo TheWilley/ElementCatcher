@@ -114,7 +114,7 @@ catcher.elements[0]
 The reason is that if an id exist, it will always be added as a key, not in the `elements` array.
 
 ### allAsArray
-This option will add all elements to the `elements` array, even tho it has an id.
+This option will add all elements to the `elements` array, even if it has an id.
 
 Lets say I have the following instance:
 ```javascript
