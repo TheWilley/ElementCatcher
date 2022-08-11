@@ -1,7 +1,7 @@
 
 /**
  * @description Element catcher to access elements with object syntax 
- * @param {object} object 
+ * @param {object} - Options object 
  * 
  * @author TheWilley
  */
