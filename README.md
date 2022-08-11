@@ -13,7 +13,7 @@ Then simply create a new instance with `new elementCatcher()` in your script.
 | Key | Type |Required | Description
 | ----------- | ------------ |------------ |------------ |
 | id  | string | yes  | The `id` of your *target element*. By default, all children of this element with be catched.  |
-| getElementsWith | string (id, class, all, allAsArray) | yes | Filter elements by type. <li> The `id` option will return all elements with an ID as an object key<li> The `class` option will return all elements with a class as an array <li>The `all` option will return all elements as either an id or class array  <li> The `allAsArray` will return all elements as an array|
+| getElementsWith | string (id, class, all, allAsArray) | yes | Filter elements by type. <li> The `id` option will return all elements with an id as an object key<li> The `class` option will return all elements with a class as an array <li>The `all` option will return all elements as either an id or class array  <li> The `allAsArray` will return all elements as an array|
 | ignoreClass | string | no | Only elements **without**   this class name will be added |
 | includeClass | string | no | Only elements **with** this class name will be added |
 | directChildren | bool | no | If you only want the direct children of your target element to be added, set this to true. By default, all elements (including "grand children") will be catched.
@@ -33,7 +33,7 @@ new elementCatcher({
 **Note that there cannot be both a `ìgnoreClass` and `includeClass`** option in the same instance
 
 ## Accessing elements
-You can access elements by directly refrencing the object or it's array variable `elements`.
+You can access elements by directly using the object or its array variable `elements`.
 ### id
 Lets say I have the following instance:
 ```javascript
@@ -89,7 +89,7 @@ Lets say I have the following instance:
 ```javascript
 var catcher = new elementCatcher({
     "id": "someId",
-    "getElementWidth": "all",
+    "getElementsWidth": "all",
     "includeClass": "someClass"
 })
 ```
