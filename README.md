@@ -39,7 +39,7 @@ Lets say I have the following instance:
 ```javascript
 var catcher = new elementCatcher({
     "id": "someId",
-    "getElementWidth": "id",
+    "getElementsWidth": "id",
     "includeClass": "someClass"
 })
 ```
@@ -65,7 +65,7 @@ Lets say I have the following instance:
 ```javascript
 var catcher = new elementCatcher({
     "id": "someId",
-    "getElementsWidth": "class",
+    "getElementsWith": "class",
     "includeClass": "someClass"
 })
 ```
