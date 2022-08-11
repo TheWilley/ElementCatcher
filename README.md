@@ -83,7 +83,7 @@ catcher.elements[0]
 ```
 
 ### all
-This option will automatically add an element as a object key if it has an ID or add it to the `elements` array if it does not. 
+This option will automatically add an element as a object key if it has an id or add it to the `elements` array if it does not. 
 
 Lets say I have the following instance:
 ```javascript
@@ -111,10 +111,10 @@ and the second span element with:
 catcher.elements[0]
 ```
 
-The reason is that if an ID exist, it will always be added as a key, not in the `elements` array.
+The reason is that if an id exist, it will always be added as a key, not in the `elements` array.
 
 ### allAsArray
-This option will add all elements to the `elements` array, even tho it has an ID.
+This option will add all elements to the `elements` array, even tho it has an id.
 
 Lets say I have the following instance:
 ```javascript
