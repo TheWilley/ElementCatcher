@@ -41,21 +41,22 @@
                 break;
             case 'class':
                 for (const element of this.#object.directChildren ? this.app.childNodes : this.app.getElementsByTagName("*")) {
-                    if (this.#object.ignoreClass) { if (element.className && element.classList.contains(!this.#object.ignoreClass)) this.elements.push(element) }
-                    else if (this.#object.includeClass) { if (element.className && element.classList.contains(this.#object.includeClass)) this.elements.push(element) }
-                    else if (element.className) { this.elements.push(element) }
+                    console.log(element.classList.length)
+                    if (this.#object.ignoreClass) { if (element.classList.length > 0 && !element.classList.contains(this.#object.ignoreClass)) this.elements.push(element); }
+                    else if (this.#object.includeClass) { if (element.classList.length > 0 && element.classList.contains(this.#object.includeClass)) this.elements.push(element) }
+                    else if (element.classList.length > 0) { this.elements.push(element) }
                 }
                 break;
             case 'all':
                 for (const element of this.#object.directChildren ? this.app.childNodes : this.app.getElementsByTagName("*")) {
-                    if (this.#object.ignoreClass) { if (element.classList.contains(!this.#object.ignoreClass)) element.id ? this[element.id] = element : this.elements.push(element) }
+                    if (this.#object.ignoreClass) { if (!element.classList.contains(this.#object.ignoreClass)) element.id ? this[element.id] = element : this.elements.push(element) }
                     else if (this.#object.includeClass) { if (element.classList.contains(this.#object.includeClass)) element.id ? this[element.id] = element : this.elements.push(element)  }
                     else { element.id ? this[element.id] = element : this.elements.push(element) } 
                 }
                 break;
             case 'allAsArray':
                 for (const element of this.#object.directChildren ? this.app.childNodes : this.app.getElementsByTagName("*")) {
-                    if (this.#object.ignoreClass) { if (element.classList.contains(!this.#object.ignoreClass)) this.elements.push(element) }
+                    if (this.#object.ignoreClass) { if (!element.classList.contains(this.#object.ignoreClass)) this.elements.push(element) }
                     else if (this.#object.includeClass) { if (element.classList.contains(this.#object.includeClass)) this.elements.push(element) }
                     else { this.elements.push(element) }
                 }
