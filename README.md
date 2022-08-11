@@ -65,7 +65,7 @@ Lets say I have the following instance:
 ```javascript
 var catcher = new elementCatcher({
     "id": "someId",
-    "getElementWidth": "class",
+    "getElementsWidth": "class",
     "includeClass": "someClass"
 })
 ```
@@ -104,7 +104,7 @@ and this html:
 
 I could then access the first span element with:
 ```javascript
-catcher.someId
+catcher.someOtherId
 ```
 and the second span element with:
 ```javascript
@@ -120,7 +120,7 @@ Lets say I have the following instance:
 ```javascript
 var catcher = new elementCatcher({
     "id": "someId",
-    "getElementWidth": "allAsArray",
+    "getElementsWidth": "allAsArray",
 })
 ```
 
