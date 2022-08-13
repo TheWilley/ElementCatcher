@@ -144,6 +144,7 @@ catcher.elements[1]
 ## Errors
 ##### `No object found`
 **Explanation:** The elementCatcher instance is missing an object 
+
 **Fix:** Add an object as a argument 
 ```javascript
 new elementCatcher({}) 
@@ -151,6 +152,7 @@ new elementCatcher({})
 
 ##### `ignoreClass and includeClass cannot exist in the same instance`
 **Explanation:** Both keys exist in the same object
+
 **Fix:** Remove one key
 ```javascript
 new elementCatcher({
@@ -161,6 +163,7 @@ new elementCatcher({
 
 ##### `No id value found`
 **Explanation:** An id key is missing
+
 **Fix:** add an id
 ```javascript
 new elementCatcher({
@@ -170,6 +173,7 @@ new elementCatcher({
 
 ##### `No id with value "id" found`
 **Explanation:** The target id could not be found
+
 **Fix:** Control that the given id exist
 ```javascript
 new elementCatcher({
