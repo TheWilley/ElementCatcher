@@ -32,9 +32,9 @@ new elementCatcher({
 
 **Note that there cannot be both a `ìgnoreClass` and `includeClass`** option in the same instance
 
-## Accessing elements
-You can access elements by directly using the object or its array variable `elements`.
-### id
+## Accessing elements / getElementsWith
+You can access elements by directly using the object or its array variable `elements`. These are the values accepted by the `getElementsWith` key.
+### `id`
 Lets say I have the following instance:
 ```javascript
 var catcher = new elementCatcher({
@@ -58,7 +58,7 @@ catcher.someSpan
 
 Thus, instead of `document.getElementById("someSpan")` we do `catcher.someSpan`.
 
-### class
+### `class`
 This option is useful if you want to iterate trough a class, but generally not useful to get a specific element as the array is dynamic.
 
 Lets say I have the following instance:
@@ -82,7 +82,7 @@ I could then access the element with:
 catcher.elements[0]
 ```
 
-### all
+### `all`
 This option will automatically add an element as a object key if it has an id or add it to the `elements` array if it does not. 
 
 Lets say I have the following instance:
@@ -113,7 +113,7 @@ catcher.elements[0]
 
 The reason is that if an id exist, it will always be added as a key, not in the `elements` array.
 
-### allAsArray
+### `allAsArray`
 This option will add all elements to the `elements` array, even if it has an id.
 
 Lets say I have the following instance:
@@ -142,7 +142,7 @@ catcher.elements[1]
 ```
 
 ## Errors
-##### `No object found`
+### `No object found`
 **Explanation:** The elementCatcher instance is missing an object 
 
 **Fix:** Add an object as a argument 
@@ -150,7 +150,7 @@ catcher.elements[1]
 new elementCatcher({}) 
 ```
 
-##### `ignoreClass and includeClass cannot exist in the same instance`
+### `ignoreClass and includeClass cannot exist in the same instance`
 **Explanation:** Both keys exist in the same object
 
 **Fix:** Remove one key
@@ -161,7 +161,7 @@ new elementCatcher({
 })
 ```
 
-##### `No id value found`
+### `No id value found`
 **Explanation:** An id key is missing
 
 **Fix:** add an id
@@ -171,7 +171,7 @@ new elementCatcher({
 })
 ```
 
-##### `No id with value "id" found`
+### `No id with value "id" found`
 **Explanation:** The target id could not be found
 
 **Fix:** Control that the given id exist
