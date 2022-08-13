@@ -141,5 +141,41 @@ and the second span element with:
 catcher.elements[1]
 ```
 
+## Errors
+##### `No object found`
+**Explanation:** The elementCatcher instance is missing an object 
+**Fix:** Add an object as a argument 
+```javascript
+new elementCatcher({}) 
+```
+
+##### `ignoreClass and includeClass cannot exist in the same instance`
+**Explanation:** Both keys exist in the same object
+**Fix:** Remove one key
+```javascript
+new elementCatcher({
+    "ignoreClass": "someClass", // Remove this line...
+    "includeClass": "someClass" // or this line
+})
+```
+
+##### `No id value found`
+**Explanation:** An id key is missing
+**Fix:** add an id
+```javascript
+new elementCatcher({
+    "id": "someid" // Add this line
+})
+```
+
+##### `No id with value "id" found`
+**Explanation:** The target id could not be found
+**Fix:** Control that the given id exist
+```javascript
+new elementCatcher({
+    "id": "someid" // Check if this id exist
+})
+```
+
 ## Help
 For help and or questions, please create an issue.
