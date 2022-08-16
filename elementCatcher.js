@@ -58,4 +58,14 @@ class elementCatcher {
             }
         }
     }
+
+    addElement(element) {
+        if(element.id) {
+            this[element.id] = element;
+        } else if(element.classList.length > 0){
+            this.elements.push(element);
+        } else {
+            this.error("Element has no id or class")
+        }
+    }
 }
