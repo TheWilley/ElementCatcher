@@ -10,13 +10,13 @@ Then simply create a new instance with `new elementCatcher()` in your script.
 
 ## Options
 
-| Key | Type |Required | Description
-| ----------- | ------------ |------------ |------------ |
-| id  | string | yes  | The `id` of your *target element*. By default, all children of this element with be catched.  |
-| getElementsWith | string (id, class, all, allAsArray) | yes | Filter elements by type. <li> The `id` option will return all elements with an id as an object key<li> The `class` option will return all elements with a class as an array <li>The `all` option will return all elements as either an id or class array  <li> The `allAsArray` option will return all elements as an array|
-| ignoreClass | string | no | Only elements **without**   this class name will be added |
-| includeClass | string | no | Only elements **with** this class name will be added |
-| directChildren | bool | no | If you only want the direct children of your target element to be added, set this to true. By default, all elements (including "grand children") will be catched.
+| Key             | Type                                | Required | Description                                                                                                                                                                                                                                                                                                                 |
+| --------------- | ----------------------------------- | -------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| id              | string                              | yes      | The `id` of your *target element*. By default, all children of this element with be catched.                                                                                                                                                                                                                                |
+| getElementsWith | string (id, class, all, allAsArray) | yes      | Filter elements by type. <li> The `id` option will return all elements with an id as an object key<li> The `class` option will return all elements with a class as an array <li>The `all` option will return all elements as either an id or class array  <li> The `allAsArray` option will return all elements as an array |
+| ignoreClass     | string                              | no       | Only elements **without**   this class name will be added                                                                                                                                                                                                                                                                   |
+| includeClass    | string                              | no       | Only elements **with** this class name will be added                                                                                                                                                                                                                                                                        |
+| directChildren  | bool                                | no       | If you only want the direct children of your target element to be added, set this to true. By default, all elements (including "grand children") will be catched.                                                                                                                                                           |
 
 
 The *target element* will be catched by default.
@@ -34,8 +34,19 @@ new elementCatcher({
 
 ## Accessing elements / getElementsWith
 You can access elements by directly using the object or its array variable `elements`. These are the values accepted by the `getElementsWith` key.
-### `id`
+
+<table>
+    <thead>
+    <th>Value</th>
+<th>Description</th>
+    </thead>
+
+<tbody>
+<tr>
+<td style="text-align: center">id</td>
+<td>
 Lets say I have the following instance:
+    
 ```javascript
 var catcher = new elementCatcher({
     "id": "someId",
@@ -43,7 +54,7 @@ var catcher = new elementCatcher({
     "includeClass": "someClass"
 })
 ```
-
+    
 and this html:
 ```html
 <div id="someId">
@@ -57,9 +68,12 @@ catcher.someSpan
 ```
 
 Thus, instead of `document.getElementById("someSpan")` we do `catcher.someSpan`.
-
-### `class`
-This option is useful if you want to iterate trough a class, but generally not useful to get a specific element as the array is dynamic.
+</td>
+</tr>
+<tr>
+    <td style="text-align: center">class</td>
+    <td>
+    This option is useful if you want to iterate trough a class, but generally not useful to get a specific element as the array is dynamic.
 
 Lets say I have the following instance:
 ```javascript
@@ -81,9 +95,13 @@ I could then access the element with:
 ```javascript
 catcher.elements[0]
 ```
-
-### `all`
-This option will automatically add an element as a object key if it has an id or add it to the `elements` array if it does not. 
+    
+</td>
+</tr>
+<tr>
+    <td style="text-align: center">all</td>
+    <td>
+This option will automatically add an element as a object key if it has an id or add it to the elements  array if it does not. 
 
 Lets say I have the following instance:
 ```javascript
@@ -112,8 +130,11 @@ catcher.elements[0]
 ```
 
 The reason is that if an id exist, it will always be added as a key, not in the `elements` array.
-
-### `allAsArray`
+    </td>
+</tr>
+<tr>
+<td style="text-align: center">allAsArray</td>
+<td>
 This option will add all elements to the `elements` array, even if it has an id.
 
 Lets say I have the following instance:
@@ -140,51 +161,80 @@ and the second span element with:
 ```javascript
 catcher.elements[1]
 ```
+</td>
+</tr>
+</tbody>
+</table>
+
+
 
 ## Errors
-### `No object found`
-**Explanation:** The elementCatcher instance is missing an object 
+<table>
+<thead>
+<th>Error</th>
+<th>Explanation</th>
+<th>Fix</th>
+</thead>
+<tbody>
+<tr>
+<td> <i> No object found </i></td>
+<td> The elementCatcher instance is missing an object </td>
+<td>
+Add an object as a argument: 
 
-**Fix:** Add an object as a argument 
 ```javascript
 new elementCatcher({}) 
 ```
+</td>
+</tr>
+<tr>
+<td> <i> ignoreClass and includeClass cannot exist in the same instance </i></td>
+<td> Both keys exist in the same object </td>
+<td>
+Remove one key:
 
-### `ignoreClass and includeClass cannot exist in the same instance`
-**Explanation:** Both keys exist in the same object
-
-**Fix:** Remove one key
 ```javascript
 new elementCatcher({
     "ignoreClass": "someClass", // Remove this line...
     "includeClass": "someClass" // or this line
 })
 ```
+</td>
+</tr>
+</tr>
+<tr>
+<td> <i> ignoreClass and includeClass cannot exist in the same instance </i></td>
+<td> Both keys exist in the same object </td>
+<td>
+Remove one key:
 
-### `No id value found`
-**Explanation:** An id key is missing
-
-**Fix:** add an id
 ```javascript
 new elementCatcher({
-    "id": "someid" // Add this line
+    "ignoreClass": "someClass", // Remove this line...
+    "includeClass": "someClass" // or this line
 })
 ```
+</td>
+</tr>
+<tr> 
+<td> <i> No id with value "id" found </i> </td>
+<td> The target id could not be found </td>
+<td> Control that the given id exist:
 
-### `No id with value "id" found`
-**Explanation:** The target id could not be found
-
-**Fix:** Control that the given id exist
 ```javascript
 new elementCatcher({
     "id": "someid" // Check if this id exist
 })
 ```
+</td>
+</tr>
+</tbody>
+</table>
 
 ## Functions
-| name | type | description
-|------|------|-----------|
-| addElement | element / array | Add one or multiple elements to the elementCatcher instance
+| Name       | Type            | Description                                                 |
+| ---------- | --------------- | ----------------------------------------------------------- |
+| addElement | element / array | Add one or multiple elements to the elementCatcher instance |
 
 
 ## Help
