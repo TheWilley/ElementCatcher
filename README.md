@@ -232,9 +232,9 @@ new elementCatcher({
 </table>
 
 ## Functions
-| Name       | Type            | Description                                                 |
+| Name       | Accepts            | Description                                                 |
 | ---------- | --------------- | ----------------------------------------------------------- |
-| addElement | element / array | Add one or multiple elements to the elementCatcher instance |
+| addElement() | element / array | Add one or multiple elements to the elementCatcher instance |
 
 
 ## Help
