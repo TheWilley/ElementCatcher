@@ -203,15 +203,15 @@ new elementCatcher({
 </tr>
 </tr>
 <tr>
-<td> <i> ignoreClass and includeClass cannot exist in the same instance </i></td>
-<td> Both keys exist in the same object </td>
+<td> <i> No id value found
+ </i></td>
+<td> An id key is missing </td>
 <td>
-Remove one key:
+Add an id
 
 ```javascript
 new elementCatcher({
-    "ignoreClass": "someClass", // Remove this line...
-    "includeClass": "someClass" // or this line
+    "id": "someid" // Add this line
 })
 ```
 </td>
