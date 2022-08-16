@@ -181,5 +181,11 @@ new elementCatcher({
 })
 ```
 
+## Functions
+| name | type | description
+|------|------|-----------|
+| addElement | element / array | Add one or multiple elements to the elementCatcher instance
+
+
 ## Help
 For help and or questions, please create an issue.
