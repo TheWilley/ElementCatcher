@@ -51,7 +51,6 @@ Lets say I have the following instance:
 var catcher = new elementCatcher({
     "id": "someId",
     "getElementsWith": "id",
-    "includeClass": "someClass"
 })
 ```
     
@@ -148,7 +147,7 @@ var catcher = new elementCatcher({
 and this html:
 ```html
 <div id="someId">
-    <span id="someOtherId" class="someClass">
+    <span id="someOtherId">
     <span class="someClass">
 </div>
 ```
