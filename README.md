@@ -24,9 +24,9 @@ The *target element* will be catched by default.
 ### Example 
 ```javascript
 new elementCatcher({
-    "id": "someId",
-    "getElementWith": "id",
-    "includeClass": "someClass"
+    id: "someId",
+    getElementWith: "id",
+    includeClass: "someClass"
 })
 ```
 
@@ -49,8 +49,8 @@ Lets say I have the following instance:
     
 ```javascript
 var catcher = new elementCatcher({
-    "id": "someId",
-    "getElementsWith": "id",
+    id: "someId",
+    getElementsWith: "id",
 })
 ```
     
@@ -80,9 +80,9 @@ This option is useful if you want to iterate trough class elements, but generall
 Lets say I have the following instance:
 ```javascript
 var catcher = new elementCatcher({
-    "id": "someId",
-    "getElementsWith": "class",
-    "includeClass": "someClass"
+    id: "someId",
+    getElementsWith: "class",
+    includeClass: "someClass"
 })
 ```
 
@@ -108,9 +108,9 @@ This option will automatically add an element as a object key if it has an id or
 Lets say I have the following instance:
 ```javascript
 var catcher = new elementCatcher({
-    "id": "someId",
-    "getElementsWith": "all",
-    "includeClass": "someClass"
+    id: "someId",
+    getElementsWith: "all",
+    includeClass: "someClass"
 })
 ```
 
@@ -142,8 +142,8 @@ This option will add all elements to the `elements` array, even if it has an id.
 Lets say I have the following instance:
 ```javascript
 var catcher = new elementCatcher({
-    "id": "someId",
-    "getElementsWith": "allAsArray",
+    id: "someId",
+    getElementsWith: "allAsArray",
 })
 ```
 
@@ -197,8 +197,8 @@ Remove one key:
 
 ```javascript
 new elementCatcher({
-    "ignoreClass": "someClass", // Remove this line...
-    "includeClass": "someClass" // or this line
+    ignoreClass: "someClass", // Remove this line...
+    includeClass: "someClass" // or this line
 })
 ```
 </td>
@@ -213,7 +213,7 @@ Add an id:
 
 ```javascript
 new elementCatcher({
-    "id": "someid" // Add this line
+    id: "someid" // Add this line
 })
 ```
 </td>
@@ -225,7 +225,7 @@ new elementCatcher({
 
 ```javascript
 new elementCatcher({
-    "id": "someid" // Check if this id exist
+    id: "someid" // Check if this id exist
 })
 ```
 </td>
