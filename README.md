@@ -66,13 +66,16 @@ I could then access the child element with:
 catcher.someSpan
 ```
 
-Thus, instead of `document.getElementById("someSpan")` we do `catcher.someSpan`.
+Therfore:
+```javascript
+document.getElementById("someSpan") = catcher.someSpan
+```
 </td>
 </tr>
 <tr>
-    <td align="center">class</td>
-    <td>
-    This option is useful if you want to iterate trough a class, but generally not useful to get a specific element as the array is dynamic.
+<td align="center">class</td>
+<td>
+This option is useful if you want to iterate trough class elements, but generally not useful to get a specific element as the array is dynamic. 
 
 Lets say I have the following instance:
 ```javascript
@@ -206,7 +209,7 @@ new elementCatcher({
  </i></td>
 <td> An id key is missing </td>
 <td>
-Add an id
+Add an id:
 
 ```javascript
 new elementCatcher({
