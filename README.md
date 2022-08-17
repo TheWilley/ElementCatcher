@@ -1,12 +1,12 @@
-# elementCatcher
+# ElementCatcher
 Access child elements using object syntax.
 
 The overall goal is to reduce the amount of `getElementById()` calls in a document and instead access elements in a object using the element id as the object key.
 
 ## Setup
-Load *elementCatcher* at the **bottom** of your html file: `<script src='elementCatcher.js'></script>` or you can add the the `defer` option to your script tag.
+Load *ElementCatcher* at the **bottom** of your html file: `<script src='elementCatcher.js'></script>` or you can add the the `defer` option to your script tag.
 
-Then simply create a new instance with `new elementCatcher()` in your script.
+Then simply create a new instance with `new ElementCatcher()` in your script.
 
 ## Options
 
@@ -23,7 +23,7 @@ The *target element* will be catched by default.
 
 ### Example 
 ```javascript
-new elementCatcher({
+new ElementCatcher({
     id: "someId",
     getElementWith: "id",
     includeClass: "someClass"
@@ -48,7 +48,7 @@ You can access elements by directly using the object or its array variable `elem
 Lets say I have the following instance:
     
 ```javascript
-var catcher = new elementCatcher({
+var catcher = new ElementCatcher({
     id: "someId",
     getElementsWith: "id",
 })
@@ -79,7 +79,7 @@ This option is useful if you want to iterate trough class elements, but generall
 
 Lets say I have the following instance:
 ```javascript
-var catcher = new elementCatcher({
+var catcher = new ElementCatcher({
     id: "someId",
     getElementsWith: "class",
     includeClass: "someClass"
@@ -107,7 +107,7 @@ This option will automatically add an element as a object key if it has an id or
 
 Lets say I have the following instance:
 ```javascript
-var catcher = new elementCatcher({
+var catcher = new ElementCatcher({
     id: "someId",
     getElementsWith: "all",
     includeClass: "someClass"
@@ -141,7 +141,7 @@ This option will add all elements to the `elements` array, even if it has an id.
 
 Lets say I have the following instance:
 ```javascript
-var catcher = new elementCatcher({
+var catcher = new ElementCatcher({
     id: "someId",
     getElementsWith: "allAsArray",
 })
@@ -180,12 +180,12 @@ catcher.elements[1]
 <tbody>
 <tr>
 <td> <i> No object found </i></td>
-<td> The elementCatcher instance is missing an object </td>
+<td> The ElementCatcher instance is missing an object </td>
 <td>
 Add an object as a argument: 
 
 ```javascript
-new elementCatcher({}) 
+new ElementCatcher({}) 
 ```
 </td>
 </tr>
@@ -196,7 +196,7 @@ new elementCatcher({})
 Remove one key:
 
 ```javascript
-new elementCatcher({
+new ElementCatcher({
     ignoreClass: "someClass", // Remove this line...
     includeClass: "someClass" // or this line
 })
@@ -212,7 +212,7 @@ new elementCatcher({
 Add an id:
 
 ```javascript
-new elementCatcher({
+new ElementCatcher({
     id: "someid" // Add this line
 })
 ```
@@ -224,7 +224,7 @@ new elementCatcher({
 <td> Control that the given id exist:
 
 ```javascript
-new elementCatcher({
+new ElementCatcher({
     id: "someid" // Check if this id exist
 })
 ```
@@ -236,7 +236,7 @@ new elementCatcher({
 ## Functions
 | Name         | Accepts         | Description                                                 |
 | ------------ | --------------- | ----------------------------------------------------------- |
-| addElement() | element / array | Add one or multiple elements to the elementCatcher instance |
+| addElement() | element / array | Add one or multiple elements to the ElementCatcher instance |
 
 
 ## Help
