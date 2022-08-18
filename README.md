@@ -4,9 +4,7 @@ Access child elements using object syntax.
 The overall goal is to reduce the amount of `getElementById()` calls in a document and instead access elements in a object using the element id as the object key.
 
 ## Setup
-Load *ElementCatcher* at the **bottom** of your html file: `<script src='elementCatcher.js'></script>` or you can add the the `defer` option to your script tag.
-
-Then simply create a new instance with `new ElementCatcher()` in your script.
+Load *ElementCatcher* in your html file `<script src='elementCatcher.js'></script>` and create a new instance with `new ElementCatcher()` in your script. The instance should be created at the end of the html as it otherwise won't find ant elements.
 
 ## Options
 
@@ -14,8 +12,8 @@ Then simply create a new instance with `new ElementCatcher()` in your script.
 | --------------- | ----------------------------------- | -------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | <div align="center"> id </div>              | string                              | yes      | The `id` of your *target element*. By default, all children of this element with be catched.                                                                                                                                                                                                                                |
 | <div align="center"> getElementsWith </div>  | string (id, class, all, allAsArray) | yes      | Filter elements by type. <li> The `id` option will return all elements with an id as an object key<li> The `class` option will return all elements with a class as an array <li>The `all` option will return all elements as either an id or class array  <li> The `allAsArray` option will return all elements as an array |
-| <div align="center"> ignoreClass </div>      | string                              | no       | Only elements **without**   this class name will be added                                                                                                                                                                                                                                                                   |
-| <div align="center"> includeClass </div>      | string                              | no       | Only elements **with** this class name will be added                                                                                                                                                                                                                                                                        |
+| <div align="center"> ignoreClass </div>      | string                              | no       | Only elements **without**   this class name will be added.                                                                                                                                                                                                                                                                   |
+| <div align="center"> includeClass </div>      | string                              | no       | Only elements **with** this class name will be added.                                                                                                                                                                                                                                                                        |
 | <div align="center"> directChildren </div>    | bool                                | no       | If you only want the direct children of your target element to be added, set this to true. By default, all elements (including "grand children") will be catched.                                                                                                                                                           |
 
 
