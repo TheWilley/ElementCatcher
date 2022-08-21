@@ -17,7 +17,7 @@ class ElementCatcher {
         /**
 
          */
-        this.#config = configuration
+        this.#config = config
 
         this.elements = []
 
