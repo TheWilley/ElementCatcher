@@ -1,5 +1,3 @@
-
-
 class ElementCatcher {
     #config
 
