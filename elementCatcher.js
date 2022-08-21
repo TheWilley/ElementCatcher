@@ -5,7 +5,7 @@ class ElementCatcher {
      * @description Element catcher to access elements with object syntax 
      * @param {Object} config The config object
      * @param {string} config.id The id of your target element. 
-     * @param {("id" | "class" | "all" | "allAsArray")=} config.getElementsWith Filters elements by type
+     * @param {("id" | "class" | "all" | "allAsArray")} config.getElementsWith Filters elements by type
      * @param {string=} config.ignoreClass Only elements without this class name will be added
      * @param {string=} config.includeClass Only elements with this class name will be added
      * @param {boolean=} config.directChildren Only catch elements that is a direct child of the target element
