@@ -1,90 +1,110 @@
-class ElementCatcher {
-    #config
-
-    /**
-     * @description Element catcher to access elements with object syntax 
-     * @param {Object} config The config object
-     * @param {string} config.id The id of your target element. 
-     * @param {("id" | "class" | "all" | "allAsArray")} config.getElementsWith Filters elements by type
-     * @param {string=} config.ignoreClass Only elements without this class name will be added
-     * @param {string=} config.includeClass Only elements with this class name will be added
-     * @param {boolean=} config.directChildren Only catch elements that is a direct child of the target element
-     * @author TheWilley
-     */
-    constructor(config) {
-        /**
-
-         */
-        this.#config = config
-
-        this.elements = []
-
-        this.app = this.returnApp()
-        this.start()
+var ElementCatcher = /** @class */ (function () {
+    function ElementCatcher(config) {
+        // Error checks before continuing
+        if (this.checkApp()) {
+            this.config = config;
+            this.elements = [];
+            this.targetElement = document.getElementById(config.id);
+            this.start();
+        }
     }
-
-    error(message) {
-        alert("[[ElementCatcher]] Error - " + message)
-        throw new Error(message)
-    }
-
-    returnApp() {
-        if (this.#config == null) this.error(`No object found`)
-        if (this.#config.ignoreClass && this.#config.includeClass) this.error(`ignoreClass and includeClass cannot exist in the same instance`)
-        if (!this.#config.id) this.error(`No id value found`)
-        if (document.getElementById(this.#config.id) == null) this.error(`No id with value "${this.#config.id}" found`)
-
-        return document.getElementById(this.#config.id)
-    }
-
-    start() {
-        for (const element of this.#config.directChildren ? this.app.childNodes : this.app.getElementsByTagName("*")) {
-            switch (this.#config.getElementsWith) {
+    ElementCatcher.prototype.error = function (message) {
+        alert("[[ElementCatcher]] Error - " + message);
+        throw new Error(message);
+    };
+    ElementCatcher.prototype.checkApp = function () {
+        if (this.config == null)
+            this.error("No object found");
+        if (this.config.hasOwnProperty('ignoreClass') && this.config.hasOwnProperty('includeClass'))
+            this.error("ignoreClass and includeClass cannot exist in the same instance");
+        if (!this.config.hasOwnProperty('id'))
+            this.error("No id value found");
+        if (document.getElementById(this.config.id) == null)
+            this.error("No id with value \"".concat(this.config.id, "\" found"));
+        return true;
+    };
+    ElementCatcher.prototype.checkForClass = function (element) {
+        if (this.config.hasOwnProperty('ignoreClass')) {
+            if (element.classList.contains(this.config.ignoreClass)) {
+                return false;
+            }
+        }
+        else if (this.config.hasOwnProperty('includeClass')) {
+            if (element.classList.contains(this.config.includeClass)) {
+                return true;
+            }
+        }
+        else {
+            return true;
+        }
+    };
+    ElementCatcher.prototype.start = function () {
+        // Check if the 'directChildren' attribute is added
+        // Because HTMLCollection is not an array, we convert - https://stackoverflow.com/a/222847
+        for (var _i = 0, _a = this.config.hasOwnProperty('directChildren') ? [].slice.call(this.targetElement.children) : [].slice.call(this.targetElement.getElementsByTagName("*")); _i < _a.length; _i++) {
+            var element = _a[_i];
+            switch (this.config.getElementsWith) {
                 case 'id':
-                    if (this.#config.ignoreClass) { if (!element.id && element.classList.contains(this.#config.ignoreClass)) this[element.id] = element }
-                    else if (this.#config.includeClass) { if (element.id && element.classList.contains(this.#config.includeClass)) this[element.id] = element }
-                    else if (element.id) { this[element.id] = element }
+                    if (this.checkForClass(element)) {
+                        // Check if an element exist before adding it
+                        if (element.id)
+                            this[element.id] = element;
+                    }
                     break;
                 case 'class':
-                    if (this.#config.ignoreClass) { if (element.classList.length > 0 && !element.classList.contains(this.#config.ignoreClass)) this.elements.push(element); }
-                    else if (this.#config.includeClass) { if (element.classList.length > 0 && element.classList.contains(this.#config.includeClass)) this.elements.push(element) }
-                    else if (element.classList.length > 0) { this.elements.push(element) }
+                    if (this.checkForClass(element)) {
+                        // Check if a class exist before adding it
+                        if (element.classList.length > 0) {
+                            this.elements.push(element);
+                        }
+                    }
                     break;
                 case 'all':
-                    if (this.#config.ignoreClass) { if (!element.classList.contains(this.#config.ignoreClass)) element.id ? this[element.id] = element : this.elements.push(element) }
-                    else if (this.#config.includeClass) { if (element.classList.contains(this.#config.includeClass)) element.id ? this[element.id] = element : this.elements.push(element) }
-                    else { element.id ? this[element.id] = element : this.elements.push(element) }
+                    if (this.checkForClass(element)) {
+                        // Check if an id OR class exist before adding it
+                        element.id ? this[element.id] = element : this.elements.push(element);
+                    }
                     break;
                 case 'allAsArray':
-                    if (this.#config.ignoreClass) { if (!element.classList.contains(this.#config.ignoreClass)) this.elements.push(element) }
-                    else if (this.#config.includeClass) { if (element.classList.contains(this.#config.includeClass)) this.elements.push(element) }
-                    else { this.elements.push(element) }
+                    if (this.checkForClass(element)) {
+                        // Just add element, no checks
+                        this.elements.push(element);
+                    }
                     break;
                 default:
-                    this.error(`'${this.#config.getElementsWith}' is not a valid 'getElementsWith' value (id, class, all, allAsArray)`)
+                    // Default to error if no paramter was enterd
+                    this.error("'".concat(this.config.getElementsWith, " ' is not a valid 'getElementsWith' value (id, class, all, allAsArray)"));
             }
         }
-    }
-
-    addElement(element) {
+    };
+    ElementCatcher.prototype.addElement = function (element) {
+        var _this = this;
+        // Add an array of elements
         if (Array.isArray(element)) {
-            element.forEach(e => {
-                if (e.id) {
-                    this[e.id] = e;
-                } else if (e.classList.length > 0) {
-                    this.elements.push(e);
-                } else {
-                    this.error("Element has no id or class")
+            element.forEach(function (e) {
+                if (e.hasOwnProperty('id')) {
+                    _this[e.id] = e;
                 }
-            })
-        } else {
-            if (element.id) {
+                else if (e.classList.length > 0) {
+                    _this.elements.push(e);
+                }
+                else {
+                    _this.elements.push(element);
+                }
+            });
+            // Add a single element
+        }
+        else {
+            if (element.hasOwnProperty('id')) {
                 this[element.id] = element;
-            } else if (element.classList.length > 0) {
+            }
+            else if (element.classList.length > 0) {
                 this.elements.push(element);
-            } else {
-                this.error("Element has no id or class")
+            }
+            else {
+                this.elements.push(element);
             }
         }
-    }
-}
+    };
+    return ElementCatcher;
+}());
