@@ -1,7 +1,7 @@
 var ElementCatcher = /** @class */ (function () {
     function ElementCatcher(config) {
         // Error checks before continuing
-        if (this.checkApp()) {
+        if (this.checkApp(config)) {
             this.config = config;
             this.elements = [];
             this.targetElement = document.getElementById(config.id);
@@ -12,15 +12,15 @@ var ElementCatcher = /** @class */ (function () {
         alert("[[ElementCatcher]] Error - " + message);
         throw new Error(message);
     };
-    ElementCatcher.prototype.checkApp = function () {
-        if (this.config == null)
+    ElementCatcher.prototype.checkApp = function (config) {
+        if (config == null)
             this.error("No object found");
-        if (this.config.hasOwnProperty('ignoreClass') && this.config.hasOwnProperty('includeClass'))
+        if (config.hasOwnProperty('ignoreClass') && this.config.hasOwnProperty('includeClass'))
             this.error("ignoreClass and includeClass cannot exist in the same instance");
-        if (!this.config.hasOwnProperty('id'))
+        if (!config.hasOwnProperty('id'))
             this.error("No id value found");
-        if (document.getElementById(this.config.id) == null)
-            this.error("No id with value \"".concat(this.config.id, "\" found"));
+        if (document.getElementById(config.id) == null)
+            this.error("No id with value \"".concat(config.id, "\" found"));
         return true;
     };
     ElementCatcher.prototype.checkForClass = function (element) {
@@ -41,7 +41,7 @@ var ElementCatcher = /** @class */ (function () {
     ElementCatcher.prototype.start = function () {
         // Check if the 'directChildren' attribute is added
         // Because HTMLCollection is not an array, we convert - https://stackoverflow.com/a/222847
-        for (var _i = 0, _a = this.config.hasOwnProperty('directChildren') ? [].slice.call(this.targetElement.children) : [].slice.call(this.targetElement.getElementsByTagName("*")); _i < _a.length; _i++) {
+        for (var _i = 0, _a = this.config.directChildren == true ? [].slice.call(this.targetElement.children) : [].slice.call(this.targetElement.getElementsByTagName("*")); _i < _a.length; _i++) {
             var element = _a[_i];
             switch (this.config.getElementsWith) {
                 case 'id':

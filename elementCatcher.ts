@@ -2,7 +2,7 @@ interface Config {
     ignoreClass: string
     includeClass: string
     getElementsWith: string
-    id: string
+    targetElement: Element
     directChildren: boolean
 }
 
@@ -14,10 +14,10 @@ class ElementCatcher {
 
     constructor(config: Config) {
         // Error checks before continuing
-        if (this.checkApp()) {
+        if (this.checkApp(config)) {
             this.config = config
             this.elements = []
-            this.targetElement = document.getElementById(config.id)!
+            this.targetElement = config.targetElement!
             this.start()
         }
     }
@@ -27,11 +27,11 @@ class ElementCatcher {
         throw new Error(message)
     }
 
-    private checkApp() {
-        if (this.config == null) this.error(`No object found`)
-        if (this.config.hasOwnProperty('ignoreClass') && this.config.hasOwnProperty('includeClass')) this.error(`ignoreClass and includeClass cannot exist in the same instance`)
-        if (!this.config.hasOwnProperty('id')) this.error(`No id value found`)
-        if (document.getElementById(this.config.id) == null) this.error(`No id with value "${this.config.id}" found`)
+    private checkApp(config: Config) {
+        if (config == null) this.error(`No object found`)
+        if (config.hasOwnProperty('ignoreClass') && this.config.hasOwnProperty('includeClass')) this.error(`ignoreClass and includeClass cannot exist in the same instance`)
+        if (!config.hasOwnProperty('targetElement')) this.error(`No targetElement value found`)
+        //if (config.targetElement == null) this.error(`No id with value "${config.targetElement}" found`)
 
         return true
     }
@@ -86,27 +86,25 @@ class ElementCatcher {
         }
     }
 
-    public addElement(element: HTMLElement) {
+    private manuallyAddControl(element: Element) {
+        if (element.hasOwnProperty('id')) {
+            this[element.id] = element;
+        } else if (element.classList.length > 0) {
+            this.elements.push(element);
+        } else {
+            this.elements.push(element);
+        }
+    }
+
+    public addElement(element: Element) {
         // Add an array of elements
         if (Array.isArray(element)) {
             element.forEach(e => {
-                if (e.hasOwnProperty('id')) {
-                    this[e.id] = e;
-                } else if (e.classList.length > 0) {
-                    this.elements.push(e);
-                } else {
-                    this.elements.push(element);
-                }
+                this.manuallyAddControl(element)
             })
-        // Add a single element
+            // Add a single element
         } else {
-            if (element.hasOwnProperty('id')) {
-                this[element.id] = element;
-            } else if (element.classList.length > 0) {
-                this.elements.push(element);
-            } else {
-                this.elements.push(element);
-            }
+            this.manuallyAddControl(element)
         }
     }
 }
