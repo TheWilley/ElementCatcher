@@ -53,7 +53,7 @@ class ElementCatcher {
     private start() {
         // Check if the 'directChildren' attribute is added
         // Because HTMLCollection is not an array, we convert - https://stackoverflow.com/a/222847
-        for (const element of this.config.hasOwnProperty('directChildren') ? [].slice.call(this.targetElement.children) : [].slice.call(this.targetElement.getElementsByTagName("*"))) {
+        for (const element of this.config.directChildren == true ? [].slice.call(this.targetElement.children) : [].slice.call(this.targetElement.getElementsByTagName("*"))) {
             switch (this.config.getElementsWith) {
                 case 'id':
                     if (this.checkForClass(element)) {
