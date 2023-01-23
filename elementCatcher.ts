@@ -8,9 +8,16 @@ interface Config {
 
 class ElementCatcher {
     // Global vraibles
-    private config: Config
-    private targetElement: Element
-    private elements: Array<Element>
+    [key: string]: any
+    private config: Config = {
+        ignoreClass: "",
+        includeClass: "",
+        getElementsWith: "id",
+        targetElement: new Element,
+        directChildren: false
+    }
+    private targetElement: Element = new Element
+    private elements: Array<Element> = []
 
     constructor(config: Config) {
         // Error checks before continuing
@@ -22,7 +29,7 @@ class ElementCatcher {
         }
     }
 
-    private error(message) {
+    private error(message: string) {
         alert("[[ElementCatcher]] Error - " + message)
         throw new Error(message)
     }
@@ -36,7 +43,7 @@ class ElementCatcher {
         return true
     }
 
-    private checkForClass(element) {
+    private checkForClass(element: Element) {
         if (this.config.hasOwnProperty('ignoreClass')) {
             if (element.classList.contains(this.config.ignoreClass)) {
                 return false
@@ -53,7 +60,8 @@ class ElementCatcher {
     private start() {
         // Check if the 'directChildren' attribute is added
         // Because HTMLCollection is not an array, we convert - https://stackoverflow.com/a/222847
-        for (const element of this.config.directChildren == true ? [].slice.call(this.targetElement.children) : [].slice.call(this.targetElement.getElementsByTagName("*"))) {
+        var element: Element = new Element
+        for (element of this.config.directChildren == true ? [].slice.call(this.targetElement.children) : [].slice.call(this.targetElement.getElementsByTagName("*"))) {
             switch (this.config.getElementsWith) {
                 case 'id':
                     if (this.checkForClass(element)) {
