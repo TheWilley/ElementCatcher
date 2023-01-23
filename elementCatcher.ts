@@ -1,7 +1,7 @@
 interface Config {
     ignoreClass: string
     includeClass: string
-    getElementsWith: string
+    getElementsWith: 'id' | 'class' | 'all' | 'allAsArray'
     targetElement: Element
     directChildren: boolean
 }
@@ -29,9 +29,9 @@ class ElementCatcher {
 
     private checkApp(config: Config) {
         if (config == null) this.error(`No object found`)
-        if (config.hasOwnProperty('ignoreClass') && this.config.hasOwnProperty('includeClass')) this.error(`ignoreClass and includeClass cannot exist in the same instance`)
-        if (!config.hasOwnProperty('targetElement')) this.error(`No targetElement value found`)
-        //if (config.targetElement == null) this.error(`No id with value "${config.targetElement}" found`)
+        if (config.hasOwnProperty('ignoreClass') && config.hasOwnProperty('includeClass')) this.error(`ignoreClass and includeClass cannot exist in the same instance`)
+        if (!config.hasOwnProperty('targetElement')) this.error(`No 'targetElement' value found`)
+        if (!config.targetElement.nodeType) this.error(`targetElement does not exist`)
 
         return true
     }
@@ -97,14 +97,21 @@ class ElementCatcher {
     }
 
     public addElement(element: Element) {
-        // Add an array of elements
-        if (Array.isArray(element)) {
-            element.forEach(e => {
-                this.manuallyAddControl(element)
-            })
-            // Add a single element
-        } else {
-            this.manuallyAddControl(element)
+        var _this = this;
+        // Check if parameter is empty
+        if (element != null) {
+            // Check if paramter is element
+            if (element.nodeType) {
+                // Add an array of elements
+                if (Array.isArray(element)) {
+                    element.forEach(e => {
+                        _this.manuallyAddControl(element)
+                    })
+                    // Add a single element
+                } else {
+                    _this.manuallyAddControl(element)
+                }
+            }
         }
     }
 }

@@ -4,7 +4,7 @@ var ElementCatcher = /** @class */ (function () {
         if (this.checkApp(config)) {
             this.config = config;
             this.elements = [];
-            this.targetElement = document.getElementById(config.id);
+            this.targetElement = config.targetElement;
             this.start();
         }
     }
@@ -15,12 +15,12 @@ var ElementCatcher = /** @class */ (function () {
     ElementCatcher.prototype.checkApp = function (config) {
         if (config == null)
             this.error("No object found");
-        if (config.hasOwnProperty('ignoreClass') && this.config.hasOwnProperty('includeClass'))
+        if (config.hasOwnProperty('ignoreClass') && config.hasOwnProperty('includeClass'))
             this.error("ignoreClass and includeClass cannot exist in the same instance");
-        if (!config.hasOwnProperty('id'))
-            this.error("No id value found");
-        if (document.getElementById(config.id) == null)
-            this.error("No id with value \"".concat(config.id, "\" found"));
+        if (!config.hasOwnProperty('targetElement'))
+            this.error("No 'targetElement' value found");
+        if (!config.targetElement.nodeType)
+            this.error("targetElement does not exist");
         return true;
     };
     ElementCatcher.prototype.checkForClass = function (element) {
@@ -77,32 +77,33 @@ var ElementCatcher = /** @class */ (function () {
             }
         }
     };
-    ElementCatcher.prototype.addElement = function (element) {
-        var _this = this;
-        // Add an array of elements
-        if (Array.isArray(element)) {
-            element.forEach(function (e) {
-                if (e.hasOwnProperty('id')) {
-                    _this[e.id] = e;
-                }
-                else if (e.classList.length > 0) {
-                    _this.elements.push(e);
-                }
-                else {
-                    _this.elements.push(element);
-                }
-            });
-            // Add a single element
+    ElementCatcher.prototype.manuallyAddControl = function (element) {
+        if (element.hasOwnProperty('id')) {
+            this[element.id] = element;
+        }
+        else if (element.classList.length > 0) {
+            this.elements.push(element);
         }
         else {
-            if (element.hasOwnProperty('id')) {
-                this[element.id] = element;
-            }
-            else if (element.classList.length > 0) {
-                this.elements.push(element);
-            }
-            else {
-                this.elements.push(element);
+            this.elements.push(element);
+        }
+    };
+    ElementCatcher.prototype.addElement = function (element) {
+        var _this = this;
+        // Check if parameter is empty
+        if (element != null) {
+            // Check if paramter is element
+            if (element.nodeType) {
+                // Add an array of elements
+                if (Array.isArray(element)) {
+                    element.forEach(function (e) {
+                        _this.manuallyAddControl(element);
+                    });
+                    // Add a single element
+                }
+                else {
+                    _this.manuallyAddControl(element);
+                }
             }
         }
     };
