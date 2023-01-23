@@ -1,9 +1,9 @@
 interface Config {
-    ignoreClass: string
-    includeClass: string
     getElementsWith: 'id' | 'class' | 'all' | 'allAsArray'
     targetElement: Element
-    directChildren: boolean
+    ignoreClass?: string
+    includeClass?: string
+    directChildren?: boolean
 }
 
 class ElementCatcher {
@@ -44,11 +44,11 @@ class ElementCatcher {
     }
 
     private checkForClass(element: Element) {
-        if (this.config.hasOwnProperty('ignoreClass')) {
+        if (this.config.ignoreClass) {
             if (element.classList.contains(this.config.ignoreClass)) {
                 return false
             }
-        } else if (this.config.hasOwnProperty('includeClass')) {
+        } else if (this.config.includeClass) {
             if (element.classList.contains(this.config.includeClass)) {
                 return true
             }
