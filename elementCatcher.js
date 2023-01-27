@@ -1,10 +1,15 @@
+"use strict";
 var ElementCatcher = /** @class */ (function () {
     function ElementCatcher(config) {
+        this.config = {
+            getElementsWith: "id",
+            targetElement: document.getElementById("app")
+        };
+        this.elements = [];
         // Error checks before continuing
         if (this.checkApp(config)) {
             this.config = config;
             this.elements = [];
-            this.targetElement = config.targetElement;
             this.start();
         }
     }
@@ -24,25 +29,24 @@ var ElementCatcher = /** @class */ (function () {
         return true;
     };
     ElementCatcher.prototype.checkForClass = function (element) {
-        if (this.config.hasOwnProperty('ignoreClass')) {
+        if (this.config.ignoreClass) {
             if (element.classList.contains(this.config.ignoreClass)) {
                 return false;
             }
         }
-        else if (this.config.hasOwnProperty('includeClass')) {
+        if (this.config.includeClass) {
             if (element.classList.contains(this.config.includeClass)) {
                 return true;
             }
         }
-        else {
-            return true;
-        }
+        return true;
     };
     ElementCatcher.prototype.start = function () {
         // Check if the 'directChildren' attribute is added
         // Because HTMLCollection is not an array, we convert - https://stackoverflow.com/a/222847
-        for (var _i = 0, _a = this.config.directChildren == true ? [].slice.call(this.targetElement.children) : [].slice.call(this.targetElement.getElementsByTagName("*")); _i < _a.length; _i++) {
-            var element = _a[_i];
+        var element;
+        for (var _i = 0, _a = this.config.directChildren == true ? [].slice.call(this.config.targetElement.children) : [].slice.call(this.config.targetElement.getElementsByTagName("*")); _i < _a.length; _i++) {
+            element = _a[_i];
             switch (this.config.getElementsWith) {
                 case 'id':
                     if (this.checkForClass(element)) {
