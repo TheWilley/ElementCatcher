@@ -6,12 +6,11 @@ interface Config {
 	directChildren?: boolean;
 }
 
-class ElementCatcher {
-	// Global vraibles
+export class ElementCatcher {
+	// Global variables
 	[key: string]: any;
 	private config: Config = {
 		getElementsWith: "id",
-		// eslint-disable-next-line @typescript-eslint/no-non-null-assertion
 		targetElement: document.getElementById("app")!
 	};
 
@@ -133,5 +132,3 @@ class ElementCatcher {
 		}
 	}
 }
-
-export default ElementCatcher;

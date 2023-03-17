@@ -10,7 +10,11 @@
     <div id="ddf">
         <div id="someId"></div>
     </div>
-    <script src="dist/elementCatcher.js"></script>
-    <script>var elementCatcher = new ElementCatcher({targetElement: document.getElementById("ddf"), getElementsWith: 'class', ignoreClass: 'sdfsdsdsdfs'})</script>
+    <script src='../dist/elementCatcher.js'></script>
+    <script type="module">
+        import {ElementCatcher} from '../dist/elementCatcher.js'
+        const elements = new ElementCatcher({targetElement: document.getElementById("ddf"), getElementsWith: 'class', ignoreClass: 'sdfsdsdsdfs'})
+        console.log(elements)
+      </script>
 </body>
 </html>

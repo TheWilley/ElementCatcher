@@ -4,13 +4,17 @@ Access child elements using object syntax.
 The overall goal is to reduce the amount of `getElementById()` calls in a document and instead access elements in a object using the element id as the object key.
 
 ## Setup
-Load *ElementCatcher* in your html file `<script src='elementCatcher.js'></script>` and create a new instance with `new ElementCatcher()` in your script. The instance should be created at the end of the html as it otherwise won't find ant elements.
+Firstly, load *ElementCatcher* in your html file using an import statement:
+```javascript
+import {ElementCatcher} from 'elementCatcher.js'
+```
+Then, create a new instance with `new ElementCatcher()` in your script. The instance should be created at the end of the html as it otherwise won't find any elements.
 
 ## Options
 
 | Key             | Type                                | Required | Description                                                                                                                                                                                                                                                                                                                 |
 | --------------- | ----------------------------------- | -------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| <div align="center"> id </div>              | string                              | yes      | The `id` of your *target element*. By default, all children of this element with be catched.                                                                                                                                                                                                                                |
+| <div align="center"> targetElement </div>              | Element                              | yes      | The *target element*. By default, all children of this element with be catched.                                                                                                                                                                                                                                |
 | <div align="center"> getElementsWith </div>  | string (id, class, all, allAsArray) | yes      | Filter elements by type. <li> The `id` option will return all elements with an id as an object key<li> The `class` option will return all elements with a class as an array <li>The `all` option will return all elements as either an id or class array  <li> The `allAsArray` option will return all elements as an array |
 | <div align="center"> ignoreClass </div>      | string                              | no       | Only elements **without**   this class name will be added.                                                                                                                                                                                                                                                                   |
 | <div align="center"> includeClass </div>      | string                              | no       | Only elements **with** this class name will be added.                                                                                                                                                                                                                                                                        |
@@ -22,13 +26,13 @@ The *target element* will be catched by default.
 ### Example 
 ```javascript
 new ElementCatcher({
-    id: "someId",
+    targetElement: document.getElementById("some_id"),
     getElementWith: "id",
-    includeClass: "someClass"
+    includeClass: "some-class"
 })
 ```
 
-**Note that there cannot be both a `ìgnoreClass` and `includeClass`** option in the same instance
+**Note that there cannot be both a `ìgnoreClass` and `includeClass` option in the same instance**
 
 ## Accessing elements / getElementsWith
 You can access elements by directly using the object or its array variable `elements`. These are the values accepted by the `getElementsWith` key.
@@ -47,26 +51,26 @@ Lets say I have the following instance:
     
 ```javascript
 var catcher = new ElementCatcher({
-    id: "someId",
+    targetElement: document.getElementById("some_id"),
     getElementsWith: "id",
 })
 ```
     
 and this html:
 ```html
-<div id="someId">
-    <span id="someSpan">
+<div id="some_id">
+    <span id="some_span">
 </div>
 ```
 
 I could then access the child element with:
 ```javascript
-catcher.someSpan
+catcher.some_span
 ```
 
 Therfore:
 ```javascript
-document.getElementById("someSpan") = catcher.someSpan
+document.getElementById("some_span") = catcher.someSpan
 ```
 </td>
 </tr>
@@ -78,16 +82,16 @@ This option is useful if you want to iterate trough class elements, but generall
 Lets say I have the following instance:
 ```javascript
 var catcher = new ElementCatcher({
-    id: "someId",
+    targetElement: document.getElementById("some_id"),
     getElementsWith: "class",
-    includeClass: "someClass"
+    includeClass: "some-class"
 })
 ```
 
 and this html:
 ```html
-<div id="someId">
-    <span class="someClass">
+<div id="some_id">
+    <span class="some-class">
 </div>
 ```
 
@@ -106,23 +110,23 @@ This option will automatically add an element as a object key if it has an id or
 Lets say I have the following instance:
 ```javascript
 var catcher = new ElementCatcher({
-    id: "someId",
+    targetElement: document.getElementById("some_id"),
     getElementsWith: "all",
-    includeClass: "someClass"
+    includeClass: "some-class"
 })
 ```
 
 and this html:
 ```html
-<div id="someId">
-    <span id="someOtherId" class="someClass">
-    <span class="someClass">
+<div id="some_id">
+    <span id="some_other_id" class="some-class">
+    <span class="some-class">
 </div>
 ```
 
 I could then access the first span element with:
 ```javascript
-catcher.someOtherId
+catcher.some_other_id
 ```
 and the second span element with:
 ```javascript
@@ -140,16 +144,16 @@ This option will add all elements to the `elements` array, even if it has an id.
 Lets say I have the following instance:
 ```javascript
 var catcher = new ElementCatcher({
-    id: "someId",
+    targetElement: document.getElementById("some_id"),
     getElementsWith: "allAsArray",
 })
 ```
 
 and this html:
 ```html
-<div id="someId">
-    <span id="someOtherId">
-    <span class="someClass">
+<div id="some_id">
+    <span id="some_other_id" class="some-class">
+    <span class="some-class">
 </div>
 ```
 
@@ -195,35 +199,35 @@ Remove one key:
 
 ```javascript
 new ElementCatcher({
-    ignoreClass: "someClass", // Remove this line...
-    includeClass: "someClass" // or this line
+    ignoreClass: "some_class", // Remove this line...
+    includeClass: "some_class" // or this line
 })
 ```
 </td>
 </tr>
 </tr>
 <tr>
-<td> <i> No id value found
+<td> <i> No 'targetElement' value found
  </i></td>
-<td> An id key is missing </td>
+<td> An element was expected as input, but none was found </td>
 <td>
 Add an id:
 
 ```javascript
 new ElementCatcher({
-    id: "someid" // Add this line
+    targetElement: document.getElementById("some_id") // Add this line
 })
 ```
 </td>
 </tr>
 <tr> 
-<td> <i> No id with value "id" found </i> </td>
-<td> The target id could not be found </td>
-<td> Control that the given id exist:
+<td> <i> targetElement does not exist </i> </td>
+<td> The target idelement could not be found </td>
+<td> Control that the given element exist:
 
 ```javascript
 new ElementCatcher({
-    id: "someid" // Check if this id exist
+    targetElement: document.getElementById("some_id") // Check if the element exist
 })
 ```
 </td>
