@@ -1,0 +1,13 @@
+{
+  "name": "elementcatcher",
+  "version": "1.0.0",
+  "description": "Access child elements using object syntax",
+  "scripts": {
+    "build": "tsc"
+  },
+  "author": "TheWilley",
+  "license": "MIT",
+  "dependencies": {
+    "typescript": "^5.0.2"
+  }
+}
