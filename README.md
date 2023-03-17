@@ -4,6 +4,13 @@ Access child elements using object syntax.
 The overall goal is to reduce the amount of `getElementById()` calls in a document and instead access elements in a object using the element id as the object key.
 
 ## Setup
+### Build project
+Install dependencies and build:
+```
+> npm i && npm run build
+```
+
+### Load ElementCatcher to JS or TS
 Firstly, load *ElementCatcher* in your html file using an import statement:
 ```javascript
 import {ElementCatcher} from 'elementCatcher.js'
